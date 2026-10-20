@@ -1,4 +1,4 @@
-import { ADD_MONEY, BUY_MINER, BUY_POWER } from "./actionTypes.js";
+import { ADD_MONEY, ADD_MONEY_BY_MINER, BUY_MINER, BUY_POWER } from "./actionTypes.js";
 
 const initialState = {
   money: 0,
@@ -25,9 +25,11 @@ export const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         money: state.money - state.minerCost,
-        miner: state.miners + 1,
+        miners: state.miners + 1,
         minerCost: state.minerCost + 2,
       };
+    case ADD_MONEY_BY_MINER:
+      return { ...state, money: state.money + (state.power * state.miners) };
     default:
       return state;
   }
